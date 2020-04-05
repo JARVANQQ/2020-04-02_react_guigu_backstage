@@ -1,10 +1,13 @@
 import React, {Component} from 'react'
-import './login.less'
-
-import { Form, Input, Button } from 'antd'
+import { Form, Input, Button, message } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
-import Logo from './images/logo.png'
+import {reqLogin} from '../../api'
+import {Redirect} from 'react-router-dom'
+import storageUtils from '../../utils/storageUtils'
+import memoryUtils from '../../utils/memoryUtils'
 
+import './login.less'
+import Logo from '../../assets/images/logo.png'
 
 //登陆的路由组件
 export default class Login extends Component {
@@ -14,13 +17,10 @@ export default class Login extends Component {
         const reg = /^[a-zA-Z0-9_]+$/
         if (!value.trim()) {
             throw new Error('用户名不能为空！')
-            return
         }else if (length < 4) {
             throw new Error('用户名最小4位！')
-            return
         }else if (length > 12) {
             throw new Error('用户名最大12位！')
-            return
         }else if (!reg.test(value)) {
             throw new Error('用户名必须是英文、数字或下划线组成！')
         }
@@ -31,23 +31,35 @@ export default class Login extends Component {
         const reg = /^[a-zA-Z0-9_]+$/
         if (!value.trim()) {
             throw new Error('密码不能为空！')
-            return
         }else if (length < 4) {
             throw new Error('密码最小4位！')
-            return
         }else if (length > 12) {
             throw new Error('密码最大12位！')
-            return
         }else if (!reg.test(value)) {
             throw new Error('密码必须是英文、数字或下划线组成！')
         }
     }
     //提交表单
-    onFinish = (values) => {
-         console.log('向后台发送请求', values)
-        // this.props.history.replace('/')
+    onFinish = async (values) => {
+        const result = await reqLogin (values)
+        if (result.status===0) {
+            const user = result.data
+            message.success('登陆成功')
+            //将登陆信息保存到内存中
+            memoryUtils.user = user
+            //将登录信息保存到localStorage
+            storageUtils.saveUser(user)
+            this.props.history.replace('/')
+        }else {
+            message.error(result.msg)
+        }
     }
+
     render () {
+        //判断本地是否有user信息，有的话读取进入
+        if (memoryUtils.user && memoryUtils.user._id) {
+          return <Redirect to='/' />
+        }
         return (
             <div className='login'>
                 <header className='login_header'>
