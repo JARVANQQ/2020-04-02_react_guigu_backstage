@@ -36,7 +36,7 @@ class LeftNav extends Component {
                     <SubMenu
                         key={item.key}
                         title={
-                            <span className='sun-menu-span'>
+                            <span className="sun-menu-span">
                                 <Icon component={item.icon}/>
                                 <span>{item.title}</span>
                             </span>
@@ -57,7 +57,7 @@ class LeftNav extends Component {
        /* console.log(selectKey)
         console.log(this.defaultOpenKey)*/
         return (
-            <div className='left-nav-wrap'>
+            <div className="left-nav-wrap">
                 <header>
                     <img src={logo} alt="logo"/>
                     <h1>硅谷后台</h1>

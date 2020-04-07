@@ -4,5 +4,6 @@ html, body{
 }
 #root{
     width: 100%;
+    min-width: 920px;
     height: 100%;
 }
