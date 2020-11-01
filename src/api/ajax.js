@@ -19,6 +19,7 @@ export default function ajax (url, data={}, type='GET') {
         dataStr = dataStr.substring(0, dataStr.lastIndexOf('&'))
         url = url + '?' + dataStr
       }
+
       // 发送get请求
       promise = axios.get(url)
     } else if (type.toUpperCase() === 'PUT') {

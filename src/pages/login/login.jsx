@@ -7,7 +7,7 @@ import storageUtils from '../../utils/storageUtils'
 import memoryUtils from '../../utils/memoryUtils'
 
 import './login.less'
-import Logo from '../../assets/images/logo.png'
+import Logo from '../../assets/images/duola.jpg'
 
 //登陆的路由组件
 export default class Login extends Component {

@@ -4,7 +4,7 @@ import { Menu } from 'antd'
 import Icon from '@ant-design/icons'
 import menuList from '../../config/menuConfig'
 
-import logo from '../../assets/images/logo.png'
+import logo from '../../assets/images/duola.jpg'
 import './left-nav.less'
 
 const { SubMenu } = Menu
@@ -60,7 +60,7 @@ class LeftNav extends Component {
             <div className="left-nav-wrap">
                 <header>
                     <img src={logo} alt="logo"/>
-                    <h1>硅谷后台</h1>
+                    <h1>咻咻后台</h1>
                 </header>
                 <Menu
                     selectedKeys={[selectKey]}
